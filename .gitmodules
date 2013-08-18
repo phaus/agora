@@ -1,0 +1,3 @@
+[submodule "repository/external/play-bootstrap"]
+	path = repository/external/play-bootstrap
+	url = https://github.com/phaus/play-bootstrap.git

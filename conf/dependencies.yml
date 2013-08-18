@@ -1,0 +1,11 @@
+# Application dependencies
+
+require:
+    - play
+#    - external -> play-bootstrap 0.1
+repositories:
+    - playCustomModules:
+        type:       local
+        artifact:   ${application.path}/repository/[organisation]/[module]/dist/[module]-[revision].zip
+        contains:
+          - external -> *

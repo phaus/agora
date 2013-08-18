@@ -18,13 +18,9 @@ import play.libs.Codec;
 public class User extends Model {
 
     @OneToMany(mappedBy = "createdBy")
-    List<Post> createdPosts;
+    List<Entry> createdEntries;
     @OneToMany(mappedBy = "updatedBy")
-    List<Post> updatedPosts;
-    @OneToMany(mappedBy = "createdBy")
-    List<Thread> createdThreads;
-    @OneToMany(mappedBy = "updatedBy")
-    List<Thread> updatedThreads;
+    List<Entry> updatedEntries;
     public String username;
     public String password;
     public String salt;
@@ -35,10 +31,8 @@ public class User extends Model {
     public User(String username) {
         created = new Date();
         updated = new Date();
-        createdPosts = new ArrayList<Post>();
-        updatedPosts = new ArrayList<Post>();
-        createdThreads = new ArrayList<Thread>();
-        updatedThreads = new ArrayList<Thread>();
+        createdEntries = new ArrayList<Entry>();
+        updatedEntries = new ArrayList<Entry>();
         this.username = username;
     }
 

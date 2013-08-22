@@ -2,14 +2,18 @@
 # This file defines all application routes (Higher priority routes first)
 # ~~~~
 
+%{ context = play.configuration.getProperty('context', '') }%
+
+*       ${context}/auth                                   module:securesocial
+
 # Home page
-GET     /                                       Application.index
+GET     ${context}/?                                     Application.index
 
 # Ignore favicon requests
-GET     /favicon.ico                            404
+GET     ${context}/favicon.ico                            404
 
 # Map static resources from the /app/public folder to the /public path
-GET     /public/                                staticDir:public
+GET     ${context}/public/                                staticDir:public
 
 # Catch all
-*       /{controller}/{action}                  {controller}.{action}
+*       ${context}/{controller}/{action}                  {controller}.{action}

@@ -17,10 +17,20 @@
         <link rel="shortcut icon" type="image/png" href="@{'/public/images/favicon.png'}">
     </head>
     <body>
-        <div class="navbar navbar-inverse navbar-fixed-top">
-            #{guest_toolbar /}
+        <div class="topbar">
+            <div class="fill">
+                <div class="container">
+                    <h3><a href="@{securesocial.SecureSocial.login()}">SecureSocial Module</a></h3>
+                </div>
+            </div>
         </div>
-        #{doLayout /}
+        <div class="container">
+            <div class="row">
+                <div class="span10 columns offset2">
+                    #{doLayout /}
+                </div>
+            </div>
+        </div>
         #{if play.mode.name() == 'DEV'}
         <script src="@{'/public/js/jquery-1.10.2.js'}" type="text/javascript" charset="${_response_encoding}"></script>
         #{/if}

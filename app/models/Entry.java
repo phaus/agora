@@ -22,15 +22,21 @@ public class Entry extends Model {
     @ManyToOne
     public User updatedBy;
     @ManyToOne
-    public DateDim created;
+    public DateDim createdDim;
     @ManyToOne
-    public DateDim updated;
+    public DateDim updatedDim;
     @ManyToMany
     public Set<Tag> tags;
+    public Date created;
+    public Date updated;
 
     public Entry(User user) {
-        created = DateDim.getDataDate(new Date());
-        updated = DateDim.getDataDate(new Date());
+        Date date = new Date();
+        DateDim dateDim = DateDim.getDataDate(date);
+        createdDim = dateDim;
+        updatedDim = dateDim;
+        created = date;
+        updated = date;
         createdBy = user;
         updatedBy = user;
         tags = new TreeSet<Tag>();
@@ -46,6 +52,8 @@ public class Entry extends Model {
     }
 
     public void update() {
-        updated = DateDim.getDataDate(new Date());
+        updatedDim = DateDim.getDataDate(new Date());
+        updated = updatedDim.fullDate;
+        save();
     }
 }

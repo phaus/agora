@@ -30,9 +30,9 @@ public class DateDim extends Model {
     public int day_of_year;
     public int hour;
     public int minute;
-    @OneToMany(mappedBy = "created")
+    @OneToMany(mappedBy = "createdDim")
     public List<Entry> createdEntries;
-    @OneToMany(mappedBy = "updated")
+    @OneToMany(mappedBy = "updatedDim")
     public List<Entry> updatedEntries;
 
     public DateDim(final Date date) {
@@ -104,7 +104,7 @@ public class DateDim extends Model {
 
     @Override
     public String toString() {
-        return String.format("%02d.%02d.%04d", day, (month + 1), year);
+        return String.format("%02d.%02d.%04d %02d:%02d", day, (month + 1), year, hour, minute);
     }
 
     private static String getDateFormat(final String dateString) {

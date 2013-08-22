@@ -18,7 +18,17 @@
     </head>
     <body>
         <div class="navbar navbar-inverse navbar-fixed-top">
+            #{if controllers.Application.activeUser}
+            #{if controllers.Application.activeUser.isAdmin()}
+            #{admin_toolbar user:controllers.Application.activeUser /}
+            #{/if}
+            #{else}
+            #{user_toolbar user:controllers.Application.activeUser /}
+            #{/else}
+            #{/if}
+            #{else}
             #{guest_toolbar /}
+            #{/else}
         </div>
         #{doLayout /}
         #{if play.mode.name() == 'DEV'}

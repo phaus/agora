@@ -8,11 +8,9 @@
     </div>
     <div class="navbar-collapse collapse">
         <ul class="nav navbar-nav">
-            <li><a href="@{Users.show(_user.id)}">Hello <strong>Admin</strong> <em>${_user}</em></a></li>  
+            <li><a href="@{Users.show(_user.id)}">Hello <em>${_user}</em></a></li>  
         </ul>
         <ul class="nav navbar-nav navbar-right">
-            <li><a href="@{Users.index()}">Users</a></li>
-            <li><a href="@{Admin.index()}">Admin</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#contact">Contact</a></li>
             <li><a href="#">Logout</a></li>

@@ -4,16 +4,20 @@
 
 %{ context = play.configuration.getProperty('context', '') }%
 
-*       ${context}/auth                                   module:securesocial
+*       ${context}/auth                                                         module:securesocial
 
 # Home page
-GET     ${context}/?                                     Application.index
+GET     ${context}/?                                                            Application.index
 
 # Ignore favicon requests
-GET     ${context}/favicon.ico                            404
+GET     ${context}/favicon.ico                                                  404
 
 # Map static resources from the /app/public folder to the /public path
-GET     ${context}/public/                                staticDir:public
+GET     ${context}/public/                                                      staticDir:public
+
+GET     ${context}/s/{<[0-9]+>sectionId}/?                                      Forums.index
+GET     ${context}/s/{<[0-9]+>sectionId}/f/{<[0-9]+>id}/?                       Forums.show
+GET     ${context}/s/{<[0-9]+>sectionId}/f/{<[0-9]+>forumId}/t/{<[0-9]+>id}/?   Threads.index
 
 # Catch all
-*       ${context}/{controller}/{action}                  {controller}.{action}
+*       ${context}/{controller}/{action}                                        {controller}.{action}

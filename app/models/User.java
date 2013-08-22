@@ -11,6 +11,7 @@ import java.util.Date;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import play.data.validation.Required;
 import play.db.jpa.Model;
 import play.libs.Codec;
 
@@ -21,12 +22,14 @@ public class User extends Model {
     List<Entry> createdEntries;
     @OneToMany(mappedBy = "updatedBy")
     List<Entry> updatedEntries;
+    @Required
     public String username;
     public String password;
     public String salt;
     public String email;
     public Date created;
     public Date updated;
+    public Date lastVisit;
 
     public User(String username) {
         created = new Date();
@@ -48,5 +51,57 @@ public class User extends Model {
         }
         String hash = Codec.hexSHA1(u.salt + password.trim());
         return hash.equals(u.password);
+    }
+
+    public String getEmail(){
+        return email != null ? this.email : "N/A";
+    }
+    
+    public DateDim getCreatedDim() {
+        return DateDim.getDataDate(created);
+    }
+
+    public DateDim getLastVisitDim() {
+        return DateDim.getDataDate(lastVisit);
+    }
+
+    public Long getCreatedPostCount() {
+        return Post.count("createdBy = ?", this);
+    }
+
+    public Long getUpdatedPostCount() {
+        return Post.count("updatedBy = ?", this);
+    }
+
+    public Long getCreatedThreadCount() {
+        return Thread.count("createdBy = ?", this);
+    }
+
+    public Long getUpdatedThreadCount() {
+        return Thread.count("updatedBy = ?", this);
+    }
+
+    public boolean canEdit(Object object) {
+        if (object instanceof Entry) {
+            Entry entry = (Entry) object;
+            return isAdmin() || username.equals(entry.createdBy.username);
+        }
+        if (object instanceof Forum) {
+            return isAdmin();
+        }
+        if (object instanceof User) {
+            User user = (User) object;
+            return isAdmin() || id.equals(user.id);
+        }
+        return false;
+    }
+
+    public boolean isAdmin() {
+        return "admin".equals(username);
+    }
+
+    @Override
+    public String toString() {
+        return this.username;
     }
 }

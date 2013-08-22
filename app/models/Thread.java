@@ -19,7 +19,7 @@ public class Thread extends Entry {
     public Forum forum;
     @OneToMany(mappedBy = "thread")
     public List<Post> posts;
-    public boolean sticky;
+    public Boolean sticky = false;
     public String subject;
 
     public Thread(String subject, Forum forum, User user) {
@@ -46,8 +46,12 @@ public class Thread extends Entry {
         }
     }
 
+    public Long getPostCount() {
+        return Post.count("thread = ?", this);
+    }
+
     public List<Post> getPosts(int page, int count) {
-        return Post.find("thread = ? ORDER BY created DESC LIMIT ?,?", this, page, count).fetch();
+        return Post.find("thread = ? ORDER BY  created DESC", this).fetch(page, count);
     }
 
     @Override

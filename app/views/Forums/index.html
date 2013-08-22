@@ -1,0 +1,24 @@
+#{extends 'main.html' /}
+#{set title:'Agora' /}
+<div class="container">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="${play.configuration.getProperty('context', '')}/">Agora</a></li>
+            <li class="active"><a href="@{Forums.index(section.id)}">${section.name}</a></li>
+        </ol>  
+    </div>
+    #{if section}
+    <div class="row jumbotron">
+        <h1>${section.name} <small>Section</small></h1>
+    </div>
+    #{list forums, as: 'forum'}
+    <div class="row">       
+        <div class="col-md-9"><h2><a href="@{Forums.show(section.id, forum.id)}">${forum.name}</a></h2></div>        
+        <div class="col-md-1"><h2>${forum.getThreadCount()}</h2> <small>Threads</small></div>
+        <div class="col-md-1"><h2>${forum.getPostCount()}</h2> <small>Posts</small></div>
+        <div class="col-md-1"><h2>${forum.getAuthorCount()}</h2> <small>Authors</small></div>
+    </div>
+    #{/list}
+    #{/if}
+    #{footer /}
+</div>

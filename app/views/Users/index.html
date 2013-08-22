@@ -1,0 +1,24 @@
+#{extends 'main.html' /}
+#{set title:'Agora' /}
+<div class="container">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="${play.configuration.getProperty('context', '')}/">Agora</a></li>
+            <li class="active"><a href="@{Users.index()}">Users</a></li>
+        </ol>  
+    </div>
+    <div class="row jumbotron">
+        <h1>Users <small>List</small></h1>
+    </div>
+    #{list users, as: 'user'}
+    <div class="row">     
+        <div class="col-md-8"><h2><a href="@{Users.show(user.id)}">${user.username}</a></h2></div>        
+        <div class="col-md-1"><h2>${user.getCreatedPostCount()}</h2> <small>Posts created</small></div>
+        <div class="col-md-1"><h2>${user.getUpdatedPostCount()}</h2> <small>Posts updated</small></div>
+        <div class="col-md-1"><h2>${user.getCreatedThreadCount()}</h2> <small>Threads created</small></div>
+        <div class="col-md-1"><h2>${user.getUpdatedThreadCount()}</h2> <small>Threads updated</small></div>
+    </div>
+    #{/list}
+
+    #{footer /}
+</div>

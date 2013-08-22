@@ -1,0 +1,33 @@
+#{extends 'main.html' /}
+#{set title:'Agora' /}
+<div class="container">
+    <div class="row">
+        <ol class="breadcrumb">
+            <li><a href="${play.configuration.getProperty('context', '')}/">Agora</a></li>
+            <li><a href="@{Users.index()}">Users</a></li>
+            <li class="active"><a href="@{Users.show(user.id)}">${user.username}</a></li>
+        </ol>  
+    </div>
+    <div class="row ">
+        <div class="col-md-4 jumbotron">
+            <img class="img-thumbnail" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIwAAACMCAYAAACuwEE+AAAEbUlEQVR4nO3Y3YrqSABF4fP+j1IQAiEgEhBBgggiIuKII44ECSGEeoU9F4lt2m6Ysw8M/bcuPui2ohV0WZX4K8Yo4Hf9+ugTwNdCMLAQDCwEAwvBwEIwsBAMLAQDC8HAQjCwEAwsBAMLwcBCMLAQDCwEAwvBwEIwsBAMLAQDC8HAQjCwEAwsBAMLwcBCMLAQDCwEAwvBwEIwsBAMLAQDC8HAQjCwEAwsBAMLwcBCMLAQDCwEAwvBwEIwsBAMLAQDC8HAQjCwEAwsBAMLwcBCMLAQDCwEAwvBwEIwsBAMLAQDC8HAQjCwEAwsBAMLwcBCMLAQDCwEA8u3CKY5LpWEVOtz82bsup0ryzLlxVrN8NjtuFKeJEqSRNmk1KX9/bn2i4lCOtWpeR6rtSpyZVk+Oo9W+3KqJEmUJKmK5UHdJ3i/fmwwTXXWfrtSHoJCCFoc69fH1Adlw1hIS9UxKlZbJSEohERZlvRj2fIlpvd1qs5Hbcppf3zIdHgKptoWw9jjPM6rSf9YkilL+rHp5vLh79uPDeY4T14+pLfBdNpMR+NZqSZGnZe5QggqNpVibLTI+ni2//ytWZ4rz6faVVGx3qvIc+X5TOe21mI0TwiZjuNg2tNLtI/zuGmRBoWQaldHxdsQ6n/G+bl96WC6rlXbtTossjfBNMdSIQSVu62mo2BOZf7q2PH/x+F1kslci2mqEIKy8tjP1bbqumoI7HUw+1miEAodDsvHazfHfnVL+3ljO/wfCl26j3/vfmQwd88RxO6qWQgK061ivPTf/mypNjYqs+Fbf+veeW6lWTJaSdKFbq/marR8CqY9rxRC0PzQKF77v8tTq9geh3mHYGI9zP12O/tKvmUw99Ulm6+12yz6rSCZaH246jDvV5Hy2F+YnpZPzz3MX4IpT88X0c/BNFrlwza02Wm96K9Z8vlK53/+6leUezAv29ZEJ+Mi+7P5psEsXl3bPMy1L7NhReiPXU/6sdW5VYy1ynx0fP58vfE2mDJ9b56g2eGkIgSFkOvUxceWdN+ivqhvGUzsWtV1rbpu1Fx3/QeVFLq0j9UnpIXWq/tqUugaoy7r4S4om2oyhDBdj+9qHsHct5W2qfu5mlbXff96891FXbxf2wRls6WWRR9qOj98+PtFMEMw5fNtdYyPrSBfqY1RMbbaLfLRapBqdaoVb3ulw+32+hrVnZfDeD66wL0HM9H5nW2lPZWvtrvYnDUbr0DZ3PrN5zP6FsH8ieZWqaoq1f/7B9jqVlWqqtuX/9Euxh8cDP4MwcBCMLAQDCwEAwvBwEIwsBAMLAQDC8HAQjCwEAwsBAMLwcBCMLAQDCwEAwvBwEIwsBAMLAQDC8HAQjCwEAwsBAMLwcBCMLAQDCwEAwvBwEIwsBAMLAQDC8HAQjCwEAwsBAMLwcBCMLAQDCwEAwvBwEIwsBAMLAQDC8HAQjCwEAwsBAMLwcBCMLAQDCwEAwvBwEIwsBAMLAQDC8HAQjCwEAwsBAMLwcBCMLAQDCwEA8u/ZlA7OBG9AJ8AAAAASUVORK5CYII=" alt="..." />
+        </div>
+        <div class="col-md-8">
+            <div class="jumbotron"> <h1>#${user.id} <small>User</small></h1>   </div> 
+        </div>
+        #{if user.isAdmin()}
+        <div class="col-md-4">
+            <div class="jumbotron"> <h2>is Admin</h2>  <small>Role</small></div>
+        </div>
+        #{/if}
+        <div class="col-md-4"> <div class="jumbotron"> <h2>${user.username}</h2> <small>Username</small></div></div>
+        <div class="col-md-4"> <div class="jumbotron"> <h2>${user.email}</h2> <small>Email</small></div></div>
+        <div class="col-md-4"> <div class="jumbotron"> <h2>${user.getCreatedDim()}</h2> <small>Registered</small></div></div>
+        <div class="col-md-4"> <div class="jumbotron"> <h2>${user.getLastVisitDim()}</h2> <small>Last Visit</small></div></div>
+        <div class="col-md-4"> <div class="jumbotron"> <h2>${user.getCreatedPostCount()}</h2> <small>Posts created</small></div></div>
+        <div class="col-md-4"> <div class="jumbotron"> <h2>${user.getUpdatedPostCount()}</h2> <small>Posts updated</small></div></div>
+        <div class="col-md-4"> <div class="jumbotron"> <h2>${user.getCreatedThreadCount()}</h2> <small>Threads created</small></div></div>
+        <div class="col-md-4"> <div class="jumbotron"> <h2>${user.getUpdatedThreadCount()}</h2> <small>Threads updated</small></div></div>
+    </div>
+    #{footer /}
+</div>

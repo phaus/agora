@@ -6,8 +6,8 @@
  */
 package controllers;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.TreeMap;
 import models.DateDim;
 import models.Entry;
 import models.Post;
@@ -21,7 +21,7 @@ public class Admin extends Application {
 
     public static void index() {
         if (activeUser.isAdmin()) {
-            Map<String, Long> stats = new HashMap<String, Long>();
+            Map<String, Long> stats = new TreeMap<String, Long>();
             stats.put("Dates", DateDim.count());
             stats.put("Sections", Section.count());
             stats.put("Forums", Forum.count());
